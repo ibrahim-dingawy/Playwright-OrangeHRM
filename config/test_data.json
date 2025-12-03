@@ -1,0 +1,35 @@
+{
+  "admin_users": [
+    {
+      "username": "Admin",
+      "password": "admin123",
+      "role": "Admin"
+    }
+  ],
+  "employee_data": {
+    "valid": {
+      "firstName": "John",
+      "middleName": "Michael",
+      "lastName": "Doe",
+      "employeeId": "EMP001"
+    },
+    "invalid": {
+      "firstName": "",
+      "lastName": ""
+    }
+  },
+  "user_roles": [
+    "Admin",
+    "ESS",
+    "Supervisor"
+  ],
+  "search_keywords": [
+    "Admin",
+    "Test",
+    "User"
+  ],
+  "pagination": {
+    "default_page_size": 50,
+    "max_page_size": 100
+  }
+}

@@ -12,7 +12,7 @@ load_dotenv()
 ROOT_DIR = Path(__file__).parent.parent
 
 # URLs
-BASE_URL = os.getenv("BASE_URL", "https://opensource-demo.orangehrmlive.com/")
+BASE_URL = os.getenv("BASE_URL", "https://opensource-demo.orangehrmlive.com/").strip()
 API_BASE_URL = os.getenv("API_BASE_URL", f"{BASE_URL}web/index.php/api/v2")
 
 # Credentials
@@ -21,7 +21,8 @@ ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
 # Browser Settings
 BROWSER = os.getenv("BROWSER", "chromium")
-HEADLESS = os.getenv("HEADLESS", "false").lower() == "true"
+# ✅ Default to headless=True for CI safety
+HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
 SLOW_MO = int(os.getenv("SLOW_MO", "0"))
 TIMEOUT = int(os.getenv("TIMEOUT", "30000"))
 

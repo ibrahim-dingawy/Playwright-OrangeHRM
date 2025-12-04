@@ -51,6 +51,34 @@ def page(context: BrowserContext) -> Page:
 
 
 @pytest.fixture(scope="function")
+def mobile_page(playwright) -> Page:
+    """
+    Create a new page emulating iPhone 14 Pro
+    """
+    iphone_14_pro = playwright.devices["iPhone 14 Pro"]
+
+    browser = playwright.chromium.launch(
+        headless=HEADLESS,
+        slow_mo=SLOW_MO
+    )
+
+    context = browser.new_context(
+        **iphone_14_pro,
+        record_video_dir=str(VIDEOS_DIR),
+        record_video_size={"width": 393, "height": 852}  # iPhone 14 Pro actual size
+    )
+
+    page = context.new_page()
+    page.set_default_timeout(TIMEOUT)
+
+    yield page
+
+    page.close()
+    context.close()
+    browser.close()
+
+
+@pytest.fixture(scope="function")
 def navigate_to_home(page: Page):
     """Navigate to application home page"""
     logger.info(f"Navigating to: {BASE_URL}")

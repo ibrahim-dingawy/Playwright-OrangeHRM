@@ -13,7 +13,7 @@
 
 Comprehensive E2E and API test automation framework for [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com/) application demonstrating:
 - Modern Playwright automation
-- UI & API testing
+- **UI, API, and Mobile Web testing**
 - Page Object Model design
 - CI/CD with GitHub Actions
 - Detailed reporting & screenshots
@@ -25,6 +25,7 @@ Comprehensive E2E and API test automation framework for [OrangeHRM Demo](https:/
 - ✅ **Playwright** - Modern, fast, reliable automation
 - ✅ **Page Object Model** - Maintainable test architecture
 - ✅ **UI + API Testing** - Comprehensive coverage
+- ✅ **Mobile Emulation** - iPhone 14 Pro viewport testing
 - ✅ **Auto-wait & Smart Assertions** - Stable tests
 - ✅ **Screenshots & Videos** on failure
 - ✅ **Trace Viewer** - Debug failed tests
@@ -51,8 +52,8 @@ Comprehensive E2E and API test automation framework for [OrangeHRM Demo](https:/
 ```
 Playwright-OrangeHRM/
 ├── config/
-│   ├── settings.py          
-│   └── test_data.json        
+│   ├── settings.py
+│   └── test_data.json
 │
 ├── tests/
 │   ├── ui/
@@ -65,22 +66,32 @@ Playwright-OrangeHRM/
 │   │   ├── test_dashboard.py
 │   │   └── test_admin_crud.py
 │   │
+│   ├── mobile/
+│   │   ├── pages/
+│   │   │   ├── mobile_dashboard_page.py
+│   │   │   └── mobile_login_page.py
+│   │   ├── test_mobile_login.py
+│   │   └── test_mobile_dashboard.py
+│   │
 │   └── api/
 │       ├── test_login_api.py
 │       ├── test_users_api.py
 │       └── test_admin_api.py
 │
 ├── utilities/
-│   ├── logger.py            
-│   ├── helpers.py           
-│   ├── api_client.py        
-│   └── generate_data.py    
+│   ├── logger.py
+│   ├── helpers.py
+│   ├── api_client.py
+│   └── generate_data.py
 │
-├── reports/                 
-├── .github/workflows/       
-├── conftest.py             
-├── pytest.ini             
-├── requirements.txt       
+├── reports/
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
+├── conftest.py
+├── pytest.ini
+├── requirements.txt
 └── README.md
 ```
 
@@ -132,6 +143,11 @@ pytest tests/ui/ -v -s
 pytest tests/api/ -v
 ```
 
+### Run Mobile Tests Only
+```bash
+pytest tests/mobile/ -v
+```
+
 ### Run Specific Test
 ```bash
 pytest tests/ui/test_login.py::TestLogin::test_successful_login_with_valid_credentials -v
@@ -156,18 +172,21 @@ pytest tests/ -v -n 4
 
 ## 📊 Test Coverage
 
-| Category | Tests | Status |
-|----------|-------|--------|
-| **UI - Login** | 5 tests | ✅ |
-| **UI - Dashboard** | 5 tests | ✅ |
-| **UI - Admin** | 6 tests | ✅ |
-| **API - Auth** | 3 tests | ⚠️ Demo limited |
-| **Total** | **16+ tests** | **95%** |
+|             Category         | Tests         | Status |
+|------------------------------|---------------|--------|
+| **UI - Login**               | 5 tests       | ✅ |
+| **UI - Dashboard**           | 5 tests       | ✅ |
+| **UI - Admin**               | 6 tests       | ✅ |
+| **API - Auth**               | 3 tests       | ⚠️ Demo limited |
+| **Mobile - Login & Dashboard | 2 tests       | ✅ |
+| **Total** | **20+ tests** | **95%** |
 
 ### Test Distribution
 - ✅ **Smoke Tests:** 10 tests
 - ✅ **Regression Tests:** 6 tests
 - ✅ **API Tests:** 3 tests (limited by demo)
+- ✅ Mobile Web Tests: 2 tests (Login + Dashboard)
+
 
 ---
 
@@ -241,6 +260,13 @@ def test_api_health_check(api_client):
     response = api_client.get("/api/v2/admin/users")
     assert response.status_code in [200, 401, 403]
 ```
+### Mobile Test
+```python
+def test_mobile_login_success(mobile_page):
+    login_page = MobileLoginPage(mobile_page)
+    login_page.login("Admin", "admin123")
+    assert mobile_page.get_by_role("heading", name="Dashboard").is_visible()
+```
 
 ---
 
@@ -281,7 +307,7 @@ MIT License
 ## 📊 Project Stats
 
 - **Lines of Code:** 1500+
-- **Test Cases:** 16+
+- **Test Cases:** 20+
 - **Page Objects:** 4
 - **Test Coverage:** 95%+
 - **Average Test Duration:** 2-3 minutes

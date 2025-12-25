@@ -226,7 +226,7 @@ playwright show-trace reports/traces/trace_xxx.zip
 
 Automated testing runs on every push/PR via GitHub Actions.
 
-**Status:** [![Tests](https://github.com/kingdingawy-sys/Playwright-OrangeHRM/actions/workflows/tests.yml/badge.svg)](https://github.com/kingdingawy-sys/Playwright-OrangeHRM/actions)
+**Status:** [![Tests](https://github.com/ibrahim-dingawy/Playwright-OrangeHRM/actions/workflows/tests.yml/badge.svg)](https://github.com/ibrahim-dingawy/Playwright-OrangeHRM/actions)
 
 ### Workflow Features:
 - ✅ Runs on Ubuntu latest
@@ -292,7 +292,8 @@ MIT License
 **Ibrahim Ahmed**
 - 💼 LinkedIn: [Ibrahim Dingawy](https://www.linkedin.com/in/ibrahim-dingawy)
 - 🐙 GitHub: [@kingdingawy-sys](https://github.com/kingdingawy-sys)
-- 📧 Email: [kingdingawy@gmail.com](mailto:kingdingawy@gmail.com)
+- 📧 Email: [ibrahim.softtest.qa@proton.me](mailto:ibrahim.softtest.qa@proton.me)
+
 
 ---
 
